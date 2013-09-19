@@ -6,5 +6,6 @@
 # "Turbolinks Redirect". If we find it, we will have the redirect location
 # in the Location header and manually direct turbolinks to visit that url.
 $( document ).on 'ajax:success', ( event, data, status, xhr ) ->
-  if xhr.status is <%= Rack::Utils::SYMBOL_TO_STATUS_CODE[ :turbolinks ] %>
-    Turbolinks.visit( xhr.getResponseHeader( 'Location' ) )
+  if typeof xhr != 'undefined' 
+    if xhr.status is <%= Rack::Utils::SYMBOL_TO_STATUS_CODE[ :turbolinks ] %>
+      Turbolinks.visit( xhr.getResponseHeader( 'Location' ) )
